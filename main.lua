@@ -59,6 +59,10 @@ function love.update(dt)
     player.keyboard = "leftdown"
   elseif love.keyboard.isDown("left") and love.keyboard.isDown("up") and player.cutscene == false then
     player.keyboard = "leftup"
+  elseif love.keyboard.isDown("up") and love.keyboard.isDown("down") and player.cutscene == false then
+    player.keyboard = "updown"
+  elseif love.keyboard.isDown("left") and love.keyboard.isDown("right") and player.cutscene == false then
+    player.keyboard = "leftright"
   elseif player.cutscene == true then
   else
     player.keyboard = "none"
@@ -95,6 +99,12 @@ function love.update(dt)
     player.body:setLinearVelocity(-player.speed, -player.speed)
     player.sprite = player.back
     player.move = true
+  elseif player.keyboard == "updown" and player.stop == false then
+    player.body:setLinearVelocity(0, 0)
+    player.move = false
+  elseif player.keyboard == "leftright" and player.stop == false then
+    player.body:setLinearVelocity(0, 0)
+    player.move = false
   elseif love.keyboard.isDown("right", "left", "up", "down") == false then
     player.move = false
     player.body:setLinearVelocity(0, 0)
