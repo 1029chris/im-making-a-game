@@ -34,7 +34,7 @@ function love.load()
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
   block = {}
-  block.body = love.physics.newBody(world, 200, 200, "static")
+  block.body = love.physics.newBody(world, 200, 200, "dynamic")
   block.shape = love.physics.newRectangleShape(50, 50)
   block.fixture = love.physics.newFixture(block.body, block.shape, 50)
   block.body:setLinearDamping(1)
