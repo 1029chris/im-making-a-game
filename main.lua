@@ -38,11 +38,15 @@ function love.load()
   block.shape = love.physics.newRectangleShape(50, 50)
   block.fixture = love.physics.newFixture(block.body, block.shape, 50)
   block.body:setLinearDamping(1)
+  block.x = 0
+  block.y = 0
 end
 function love.update(dt)
   world:update(dt)
   player.x = player.body:getX()
   player.y = player.body:getY()
+  block.x = block.body:getX()
+  block.y = block.body:getY()
   if love.keyboard.isDown("up") and love.keyboard.isDown("down", "left", "right") == false and player.cutscene == false then
     player.keyboard = "up"
   elseif love.keyboard.isDown("down") and love.keyboard.isDown("left", "up", "right") == false and player.cutscene == false then
@@ -144,6 +148,6 @@ function love.update(dt)
   end
 end
 function love.draw()
-  love.graphics.rectangle("fill", block.body:getX(), block.body:getY(), 50, 50)
+  love.graphics.rectangle("fill", block.x, block.y, 50, 50)
   love.graphics.draw(player.img, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
 end
