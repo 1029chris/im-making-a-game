@@ -30,7 +30,7 @@ function love.load()
   player.cutscene = false
   love.physics.setMeter(32)
   world = love.physics.newWorld(0, 0, true)
-  player.body = love.physics.newBody(world, 650/2, 650/2, "dynamic")
+  player.body = love.physics.newBody(world, 325, 325, "dynamic")
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
   block = {}
