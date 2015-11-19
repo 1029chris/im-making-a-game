@@ -34,6 +34,8 @@ function love.load()
   player.body = love.physics.newBody(world, 325, 325, "dynamic")
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
+  shadowimg = love.graphics.newImage("assets/shadow.png")
+  shadowimg:setFilter("nearest", "nearest")
   block = {}
   block.body = love.physics.newBody(world, 200, 200, "static")
   block.shape = love.physics.newRectangleShape(50, 50)
@@ -150,5 +152,6 @@ function love.update(dt)
 end
 function love.draw()
   love.graphics.rectangle("fill", block.x, block.y, 50, 50)
+  love.graphics.draw(shadowimg, player.x, player.y, 0, 3, 3, 0, -10)
   love.graphics.draw(player.img, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
 end
