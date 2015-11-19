@@ -1,6 +1,7 @@
 function love.load()
   love.physics.setMeter(32)
   world = love.physics.newWorld(0, 0, true)
+  love.graphics.setBackgroundColor(102, 204, 255)
   player = {}
   player.x = 0
   player.y = 0
