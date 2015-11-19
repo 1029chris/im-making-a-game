@@ -38,11 +38,17 @@ function love.load()
   shadowimg:setFilter("nearest", "nearest")
   block = {}
   block.body = love.physics.newBody(world, 200, 200, "static")
-  block.shape = love.physics.newRectangleShape(50, 50)
+  block.shape = love.physics.newRectangleShape(48, 48)
   block.fixture = love.physics.newFixture(block.body, block.shape, 50)
   block.body:setLinearDamping(1)
   block.x = 0
   block.y = 0
+  grass = {}
+  grass.img = love.graphics.newImage("assets/dirt.png")
+  grass.grass = love.graphics.newQuad(0, 0, 16, 16, grass.img:getDimensions())
+  grass.dirt = love.graphics.newQuad(0, 16, 32, 16, grass.img:getDimensions())
+  grass.grassdirt = love.graphics.newQuad(0, 16, 16, 16, grass.img:getDimensions())
+  grass.img:setFilter("nearest", "nearest")
 end
 function love.update(dt)
   world:update(dt)
@@ -151,7 +157,7 @@ function love.update(dt)
   end
 end
 function love.draw()
-  love.graphics.rectangle("fill", block.x, block.y, 50, 50)
   love.graphics.draw(shadowimg, player.x, player.y, 0, 3, 3, 0, -10)
+  love.graphics.draw(grass.img, grass.grassdirt, block.x, block.y, 0, 3, 3)
   love.graphics.draw(player.img, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
 end
