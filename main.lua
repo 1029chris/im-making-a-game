@@ -36,8 +36,14 @@ function love.load()
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
   shadowimg = love.graphics.newImage("assets/shadow.png")
   shadowimg:setFilter("nearest", "nearest")
+  island = {}
+  island.img = love.graphics.newImage("assets/island.png")
+  island.img:setFilter("nearest", "nearest")
+  island.x, island.y = love.graphics.getDimensions()
+  island.x = island.x/2
+  island.y = island.y/2
   block = {}
-  block.body = love.physics.newBody(world, 200, 200, "static")
+  block.body = love.physics.newBody(world, island.x, island.y, "static")
   block.shape = love.physics.newRectangleShape(48, 48)
   block.fixture = love.physics.newFixture(block.body, block.shape, 50)
   block.body:setLinearDamping(1)
@@ -157,6 +163,7 @@ function love.update(dt)
   end
 end
 function love.draw()
+  love.graphics.draw(island.img, island.x, island.y, 0, 3, 3, 80, 32)
   love.graphics.draw(shadowimg, player.x, player.y, 0, 3, 3, 0, -10)
   love.graphics.draw(grass.img, grass.grassdirt, block.x, block.y, 0, 3, 3)
   love.graphics.draw(player.img, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
