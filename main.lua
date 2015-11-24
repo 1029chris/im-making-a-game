@@ -27,7 +27,7 @@ function love.load()
   player.ani = 0
   player.anidelay = 0.2
   player.img:setFilter("nearest", "nearest")
-  player.speed = 80
+  player.speed = 120
   player.keyboard = "none"
   player.stop = false
   player.cutscene = false
