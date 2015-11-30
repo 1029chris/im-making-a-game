@@ -60,6 +60,10 @@ function love.load()
   wall.body3:setLinearDamping(1)
   wall.x = 0
   wall.y = 0
+  test = {}
+  test.body = love.physics.newBody(world, -32, -48)
+  test.shape = love.physics.newChainShape(false, 130, 145, 510, 145, 510, 190, 560, 190, 560, 290, 510, 290)
+  test.fixture = love.physics.newFixture(test.body, test.shape, 1)
   grass = {}
   grass.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
   grass.dirt = love.graphics.newQuad(0, 16, 32, 16, assets.grass:getDimensions())
