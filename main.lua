@@ -51,6 +51,10 @@ function love.load()
   wall.shape2 = love.physics.newRectangleShape(78, 40)
   wall.fixture2 = love.physics.newFixture(wall.body2, wall.shape2, 50)
   wall.body2:setLinearDamping(1)
+  wall.body3 = love.physics.newBody(world, island.x/2-48-40-48, island.y/2+48-40, "static")
+  wall.shape3 = love.physics.newRectangleShape(78, 300)
+  wall.fixture3 = love.physics.newFixture(wall.body3, wall.shape3, 50)
+  wall.body3:setLinearDamping(1)
   wall.x = 0
   wall.y = 0
   grass = {}
