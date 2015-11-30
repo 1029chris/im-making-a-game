@@ -176,4 +176,5 @@ function love.draw()
   love.graphics.draw(assets.shadow, player.x, player.y, 0, 3, 3, 0, -10)
   --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
   love.graphics.draw(assets.player, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
+  love.graphics.print(love.mouse.getX() .. ", " .. love.mouse.getY())
 end
