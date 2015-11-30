@@ -2,23 +2,31 @@ function love.load()
   love.physics.setMeter(32)
   world = love.physics.newWorld(0, 0, true)
   love.graphics.setBackgroundColor(102, 204, 255)
+  assets = {}
+  assets.player = love.graphics.newImage("assets/char.png")
+  assets.shadow = love.graphics.newImage("assets/shadow.png")
+  assets.grass = love.graphics.newImage("assets/dirt.png")
+  assets.island = love.graphics.newImage("assets/island.png")
+  assets.player:setFilter("nearest", "nearest")
+  assets.shadow:setFilter("nearest", "nearest")
+  assets.grass:setFilter("nearest", "nearest")
+  assets.island:setFilter("nearest", "nearest")
   player = {}
   player.x = 0
   player.y = 0
   player.move = false
-  player.img = love.graphics.newImage("assets/char.png")
-  player.front1 = love.graphics.newQuad(2, 1, 12, 26, player.img:getDimensions())
-  player.front2 = love.graphics.newQuad(18, 1, 12, 26, player.img:getDimensions())
-  player.front3 = love.graphics.newQuad(34, 1, 12, 26, player.img:getDimensions())
-  player.back1 = love.graphics.newQuad(2, 29, 12, 26, player.img:getDimensions())
-  player.back2 = love.graphics.newQuad(18, 29, 12, 26, player.img:getDimensions())
-  player.back3 = love.graphics.newQuad(34, 29, 12, 26, player.img:getDimensions())
-  player.right1 = love.graphics.newQuad(2, 57, 12, 26, player.img:getDimensions())
-  player.right2 = love.graphics.newQuad(18, 57, 12, 26, player.img:getDimensions())
-  player.right3 = love.graphics.newQuad(34, 57, 12, 26, player.img:getDimensions())
-  player.left1 = love.graphics.newQuad(2, 85, 12, 26, player.img:getDimensions())
-  player.left2 = love.graphics.newQuad(18, 85, 12, 26, player.img:getDimensions())
-  player.left3 = love.graphics.newQuad(34, 85, 12, 26, player.img:getDimensions())
+  player.front1 = love.graphics.newQuad(2, 1, 12, 26, assets.player:getDimensions())
+  player.front2 = love.graphics.newQuad(18, 1, 12, 26, assets.player:getDimensions())
+  player.front3 = love.graphics.newQuad(34, 1, 12, 26, assets.player:getDimensions())
+  player.back1 = love.graphics.newQuad(2, 29, 12, 26, assets.player:getDimensions())
+  player.back2 = love.graphics.newQuad(18, 29, 12, 26, assets.player:getDimensions())
+  player.back3 = love.graphics.newQuad(34, 29, 12, 26, assets.player:getDimensions())
+  player.right1 = love.graphics.newQuad(2, 57, 12, 26, assets.player:getDimensions())
+  player.right2 = love.graphics.newQuad(18, 57, 12, 26, assets.player:getDimensions())
+  player.right3 = love.graphics.newQuad(34, 57, 12, 26, assets.player:getDimensions())
+  player.left1 = love.graphics.newQuad(2, 85, 12, 26, assets.player:getDimensions())
+  player.left2 = love.graphics.newQuad(18, 85, 12, 26, assets.player:getDimensions())
+  player.left3 = love.graphics.newQuad(34, 85, 12, 26, assets.player:getDimensions())
   player.sprite = player.front1
   player.front = player.front1
   player.back = player.back1
@@ -26,7 +34,6 @@ function love.load()
   player.left = player.left1
   player.ani = 0
   player.anidelay = 0.2
-  player.img:setFilter("nearest", "nearest")
   player.speed = 120
   player.keyboard = "none"
   player.stop = false
@@ -34,11 +41,7 @@ function love.load()
   player.body = love.physics.newBody(world, 325, 325, "dynamic")
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
-  shadowimg = love.graphics.newImage("assets/shadow.png")
-  shadowimg:setFilter("nearest", "nearest")
   island = {}
-  island.img = love.graphics.newImage("assets/island.png")
-  island.img:setFilter("nearest", "nearest")
   island.x, island.y = love.graphics.getDimensions()
   island.x = island.x/2
   island.y = island.y/2
@@ -58,11 +61,9 @@ function love.load()
   wall.x = 0
   wall.y = 0
   grass = {}
-  grass.img = love.graphics.newImage("assets/dirt.png")
-  grass.grass = love.graphics.newQuad(0, 0, 16, 16, grass.img:getDimensions())
-  grass.dirt = love.graphics.newQuad(0, 16, 32, 16, grass.img:getDimensions())
-  grass.grassdirt = love.graphics.newQuad(0, 16, 16, 16, grass.img:getDimensions())
-  grass.img:setFilter("nearest", "nearest")
+  grass.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
+  grass.dirt = love.graphics.newQuad(0, 16, 32, 16, assets.grass:getDimensions())
+  grass.grassdirt = love.graphics.newQuad(0, 16, 16, 16, assets.grass:getDimensions())
 end
 function love.update(dt)
   world:update(dt)
@@ -171,8 +172,8 @@ function love.update(dt)
   end
 end
 function love.draw()
-  love.graphics.draw(island.img, island.x, island.y, 0, 3, 3, 80, 32)
-  love.graphics.draw(shadowimg, player.x, player.y, 0, 3, 3, 0, -10)
-  --love.graphics.draw(grass.img, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
-  love.graphics.draw(player.img, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
+  love.graphics.draw(assets.island, island.x, island.y, 0, 3, 3, 80, 32)
+  love.graphics.draw(assets.shadow, player.x, player.y, 0, 3, 3, 0, -10)
+  --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
+  love.graphics.draw(assets.player, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
 end
