@@ -42,17 +42,17 @@ function love.load()
   island.x, island.y = love.graphics.getDimensions()
   island.x = island.x/2
   island.y = island.y/2
-  block = {}
-  block.body1 = love.physics.newBody(world, island.x/2-48, island.y/2+48, "static")
-  block.shape1 = love.physics.newRectangleShape(78, 32)
-  block.fixture1 = love.physics.newFixture(block.body1, block.shape1, 50)
-  block.body1:setLinearDamping(1)
-  block.body2 = love.physics.newBody(world, island.x/2-48, island.y/2+48+48+48+12, "static")
-  block.shape2 = love.physics.newRectangleShape(78, 32)
-  block.fixture2 = love.physics.newFixture(block.body2, block.shape2, 50)
-  block.body2:setLinearDamping(1)
-  block.x = 0
-  block.y = 0
+  wall = {}
+  wall.body1 = love.physics.newBody(world, island.x/2-48-40, island.y/2+48-40, "static")
+  wall.shape1 = love.physics.newRectangleShape(78, 32)
+  wall.fixture1 = love.physics.newFixture(wall.body1, wall.shape1, 50)
+  wall.body1:setLinearDamping(1)
+  wall.body2 = love.physics.newBody(world, island.x/2-48-40, island.y/2+48+48+48+12-25, "static")
+  wall.shape2 = love.physics.newRectangleShape(78, 40)
+  wall.fixture2 = love.physics.newFixture(wall.body2, wall.shape2, 50)
+  wall.body2:setLinearDamping(1)
+  wall.x = 0
+  wall.y = 0
   grass = {}
   grass.img = love.graphics.newImage("assets/dirt.png")
   grass.grass = love.graphics.newQuad(0, 0, 16, 16, grass.img:getDimensions())
@@ -64,8 +64,8 @@ function love.update(dt)
   world:update(dt)
   player.x = player.body:getX()
   player.y = player.body:getY()
-  block.x = block.body1:getX()
-  block.y = block.body1:getY()
+  wall.x = wall.body1:getX()
+  wall.y = wall.body1:getY()
   if love.keyboard.isDown("up") and love.keyboard.isDown("down", "left", "right") == false and player.cutscene == false then
     player.keyboard = "up"
   elseif love.keyboard.isDown("down") and love.keyboard.isDown("left", "up", "right") == false and player.cutscene == false then
@@ -169,6 +169,6 @@ end
 function love.draw()
   love.graphics.draw(island.img, island.x, island.y, 0, 3, 3, 80, 32)
   love.graphics.draw(shadowimg, player.x, player.y, 0, 3, 3, 0, -10)
-  --love.graphics.draw(grass.img, grass.grassdirt, block.x, block.y, 0, 3, 3)
+  --love.graphics.draw(grass.img, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
   love.graphics.draw(player.img, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
 end
