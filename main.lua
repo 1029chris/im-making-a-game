@@ -51,12 +51,6 @@ function love.load()
     2, 1, 1, 1, 1, 1, 1, 1, 1, 2,
     0, 2, 2, 2, 2, 2, 2, 2, 2, 0
   }
-  island.canvas = love.graphics.newCanvas(160, 64)
-  love.graphics.setCanvas(island.canvas)
-    island.canvas:clear()
-    love.graphics.rectangle('fill', 0, 0, 50, 50)
-    love.graphics.rectangle('fill', 20, 20, 40, 40)
-  love.graphics.setCanvas()
   wall = {}
   wall.body1 = love.physics.newBody(world, island.x/2-48-40, island.y/2+48-40, "static")
   wall.shape1 = love.physics.newRectangleShape(78, 32)
@@ -188,7 +182,6 @@ function love.update(dt)
   end
 end
 function love.draw()
-  love.graphics.draw(island.canvas, 50, 50)
   love.graphics.draw(assets.island, island.x, island.y, 0, 3, 3, 80, 32)
   love.graphics.draw(assets.shadow, player.x, player.y, 0, 3, 3, 0, -10)
   --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
