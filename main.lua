@@ -44,10 +44,10 @@ function love.load()
   island.x = island.x/2
   island.y = island.y/2
   island.data = {
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-    0, 2, 2, 2, 2, 2, 2, 2, 2, 0
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 9999,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 9999,
+    0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9998
   }
   island.map = love.graphics.newCanvas(160, 64)
   island.map:setFilter("nearest", "nearest")
@@ -196,13 +196,13 @@ function love.draw()
         love.graphics.draw(assets.grass, grass.grassdirt, island.tilex, island.tiley)
       love.graphics.setCanvas()
     end
-    if island.tilex == 160 and island.tiley == 64-16 then
+    if island.data[island.tile] == 9998 then
       island.mapfinish = true
     end
-    if island.tilex ~= 160 then
+    if island.data[island.tile] ~= 9999 then
         island.tilex = island.tilex + 16
     end
-    if island.tilex == 160 then
+    if island.data[island.tile] == 9999 then
         island.tilex = 0
         island.tiley = island.tiley + 16
     end
