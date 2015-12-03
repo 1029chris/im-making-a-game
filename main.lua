@@ -74,10 +74,10 @@ function love.load()
   test.body = love.physics.newBody(world, -32, -48)
   test.shape = love.physics.newChainShape(false, 130, 145, 510, 145, 510, 190, 560, 190, 560, 290, 510, 290)
   test.fixture = love.physics.newFixture(test.body, test.shape, 1)
-  grass = {}
-  grass.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
-  grass.dirt = love.graphics.newQuad(0, 16, 32, 16, assets.grass:getDimensions())
-  grass.grassdirt = love.graphics.newQuad(0, 16, 16, 16, assets.grass:getDimensions())
+  tilemap = {}
+  tilemap.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
+  tilemap.dirt = love.graphics.newQuad(0, 16, 32, 16, assets.grass:getDimensions())
+  tilemap.grassdirt = love.graphics.newQuad(0, 16, 16, 16, assets.grass:getDimensions())
 end
 function love.update(dt)
   world:update(dt)
@@ -189,11 +189,11 @@ function love.draw()
   if island.mapfinish == false then
     if island.data[island.tile] == 1 then
       love.graphics.setCanvas(island.map)
-        love.graphics.draw(assets.grass, grass.grass, island.tilex, island.tiley)
+        love.graphics.draw(assets.grass, tilemap.grass, island.tilex, island.tiley)
       love.graphics.setCanvas()
     elseif island.data[island.tile] == 2 then
       love.graphics.setCanvas(island.map)
-        love.graphics.draw(assets.grass, grass.grassdirt, island.tilex, island.tiley)
+        love.graphics.draw(assets.grass, tilemap.grassdirt, island.tilex, island.tiley)
       love.graphics.setCanvas()
     end
     if island.data[island.tile] == 9998 then
