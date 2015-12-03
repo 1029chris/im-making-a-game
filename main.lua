@@ -6,11 +6,9 @@ function love.load()
   assets.player = love.graphics.newImage("assets/char.png")
   assets.shadow = love.graphics.newImage("assets/shadow.png")
   assets.grass = love.graphics.newImage("assets/dirt.png")
-  assets.island = love.graphics.newImage("assets/island.png")
   assets.player:setFilter("nearest", "nearest")
   assets.shadow:setFilter("nearest", "nearest")
   assets.grass:setFilter("nearest", "nearest")
-  assets.island:setFilter("nearest", "nearest")
   player = {}
   player.x = 0
   player.y = 0
@@ -51,6 +49,12 @@ function love.load()
     2, 1, 1, 1, 1, 1, 1, 1, 1, 2,
     0, 2, 2, 2, 2, 2, 2, 2, 2, 0
   }
+  island.map = love.graphics.newCanvas(160, 64)
+  island.map:setFilter("nearest", "nearest")
+  island.mapfinish = false
+  island.tile = 1
+  island.tilex = 0
+  island.tiley = 0
   wall = {}
   wall.body1 = love.physics.newBody(world, island.x/2-48-40, island.y/2+48-40, "static")
   wall.shape1 = love.physics.newRectangleShape(78, 32)
@@ -182,7 +186,29 @@ function love.update(dt)
   end
 end
 function love.draw()
-  love.graphics.draw(assets.island, island.x, island.y, 0, 3, 3, 80, 32)
+  if island.mapfinish == false then
+    if island.data[island.tile] == 1 then
+      love.graphics.setCanvas(island.map)
+        love.graphics.draw(assets.grass, grass.grass, island.tilex, island.tiley)
+      love.graphics.setCanvas()
+    elseif island.data[island.tile] == 2 then
+      love.graphics.setCanvas(island.map)
+        love.graphics.draw(assets.grass, grass.grassdirt, island.tilex, island.tiley)
+      love.graphics.setCanvas()
+    end
+    if island.tilex == 160 and island.tiley == 64-16 then
+      island.mapfinish = true
+    end
+    if island.tilex ~= 160 then
+        island.tilex = island.tilex + 16
+    end
+    if island.tilex == 160 then
+        island.tilex = 0
+        island.tiley = island.tiley + 16
+    end
+    island.tile = island.tile + 1
+  end
+  love.graphics.draw(island.map, island.x, island.y, 0, 3, 3, 80, 32)
   love.graphics.draw(assets.shadow, player.x, player.y, 0, 3, 3, 0, -10)
   --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
   love.graphics.draw(assets.player, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
