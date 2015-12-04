@@ -50,8 +50,7 @@ function love.load()
     2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 9999,
     0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9998
   }
-  island.map = love.graphics.newCanvas(160, 64)
-  island.map:setFilter("nearest", "nearest")
+  island.map = love.graphics.newSpriteBatch(assets.grass, 1000)
   island.mapfinish = false
   island.tile = 1
   island.tilex = 0
@@ -180,13 +179,9 @@ end
 function love.draw()
   while island.mapfinish == false do
     if island.data[island.tile] == 1 then
-      love.graphics.setCanvas(island.map)
-        love.graphics.draw(assets.grass, grass.grass, island.tilex, island.tiley)
-      love.graphics.setCanvas()
+      island.map:add(grass.grass, island.tilex, island.tiley)
     elseif island.data[island.tile] == 2 then
-      love.graphics.setCanvas(island.map)
-        love.graphics.draw(assets.grass, grass.grassdirt, island.tilex, island.tiley)
-      love.graphics.setCanvas()
+      island.map:add(grass.grassdirt, island.tilex, island.tiley)
     end
     if island.data[island.tile] == 9998 then
       island.mapfinish = true
