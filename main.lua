@@ -40,31 +40,32 @@ function love.load()
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
   player.frame = 1
-  island = {}
-  island.x, island.y = love.graphics.getDimensions()
-  island.x = island.x/2
-  island.y = island.y/2
-  island.data = {
+  map = {}
+  map.island = {}
+  map.island.x, map.island.y = love.graphics.getDimensions()
+  map.island.x = map.island.x/2
+  map.island.y = map.island.y/2
+  map.island.data = {
     0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 9999,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
     2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 9999,
     0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9998
   }
-  island.map = love.graphics.newSpriteBatch(assets.grass, 1000)
-  island.mapfinish = false
-  island.tile = 1
-  island.tilex = 0
-  island.tiley = 0
+  map.island.map = love.graphics.newSpriteBatch(assets.grass, 1000)
+  map.finish = false
+  map.tile = 1
+  map.tilex = 0
+  map.tiley = 0
   wall = {}
-  wall.body1 = love.physics.newBody(world, island.x/2-48-40, island.y/2+48-40, "static")
+  wall.body1 = love.physics.newBody(world, map.island.x/2-48-40, map.island.y/2+48-40, "static")
   wall.shape1 = love.physics.newRectangleShape(78, 32)
   wall.fixture1 = love.physics.newFixture(wall.body1, wall.shape1, 50)
   wall.body1:setLinearDamping(1)
-  wall.body2 = love.physics.newBody(world, island.x/2-48-40, island.y/2+48+48+48+12-25, "static")
+  wall.body2 = love.physics.newBody(world, map.island.x/2-48-40, map.island.y/2+48+48+48+12-25, "static")
   wall.shape2 = love.physics.newRectangleShape(78, 40)
   wall.fixture2 = love.physics.newFixture(wall.body2, wall.shape2, 50)
   wall.body2:setLinearDamping(1)
-  wall.body3 = love.physics.newBody(world, island.x/2-48-40-48, island.y/2+48-40, "static")
+  wall.body3 = love.physics.newBody(world, map.island.x/2-48-40-48, map.island.y/2+48-40, "static")
   wall.shape3 = love.physics.newRectangleShape(78, 300)
   wall.fixture3 = love.physics.newFixture(wall.body3, wall.shape3, 50)
   wall.body3:setLinearDamping(1)
@@ -173,25 +174,23 @@ function love.update(dt)
   end
 end
 function love.draw()
-  while island.mapfinish == false do
-    if island.data[island.tile] == 1 then
-      island.map:add(grass.grass, island.tilex, island.tiley)
-    elseif island.data[island.tile] == 2 then
-      island.map:add(grass.grassdirt, island.tilex, island.tiley)
+  while map.finish == false do
+    if map.island.data[map.tile] == 1 then
+      map.island.map:add(grass.grass, map.tilex, map.tiley)
+    elseif map.island.data[map.tile] == 2 then
+      map.island.map:add(grass.grassdirt, map.tilex, map.tiley)
     end
-    if island.data[island.tile] == 9998 then
-      island.mapfinish = true
+    if map.island.data[map.tile] == 9998 then
+      map.finish = true
+    elseif map.island.data[map.tile] ~= 9999 then
+        map.tilex = map.tilex + 16
+    elseif map.island.data[map.tile] == 9999 then
+        map.tilex = 0
+        map.tiley = map.tiley + 16
     end
-    if island.data[island.tile] ~= 9999 then
-        island.tilex = island.tilex + 16
-    end
-    if island.data[island.tile] == 9999 then
-        island.tilex = 0
-        island.tiley = island.tiley + 16
-    end
-    island.tile = island.tile + 1
+    map.tile = map.tile + 1
   end
-  love.graphics.draw(island.map, island.x, island.y, 0, 3, 3, 80, 32)
+  love.graphics.draw(map.island.map, map.island.x, map.island.y, 0, 3, 3, 80, 32)
   love.graphics.draw(assets.shadow, player.x, player.y, 0, 3, 3, 0, -10)
   --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
   love.graphics.draw(assets.player, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
