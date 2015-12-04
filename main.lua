@@ -36,7 +36,7 @@ function love.load()
   player.keyboard = "none"
   player.stop = false
   player.cutscene = false
-  player.body = love.physics.newBody(world, 325, 325, "dynamic")
+  player.body = love.physics.newBody(world, 325, 220s, "dynamic")
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
   player.frame = 1
