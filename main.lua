@@ -78,10 +78,6 @@ function love.load()
   grass.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
   grass.dirt = love.graphics.newQuad(0, 16, 32, 16, assets.grass:getDimensions())
   grass.grassdirt = love.graphics.newQuad(0, 16, 16, 16, assets.grass:getDimensions())
-  tilemap = {}
-  tilemap[1] = grass.grass
-  tilemap[2] = grass.grassdirt
-  tilemap[3] = grass.dirt
 end
 function love.update(dt)
   world:update(dt)
