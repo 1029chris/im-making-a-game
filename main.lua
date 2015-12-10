@@ -86,15 +86,7 @@ function love.update(dt)
   player.y = player.body:getY()
   wall.x = wall.body1:getX()
   wall.y = wall.body1:getY()
-  if love.keyboard.isDown("up") and love.keyboard.isDown("down", "left", "right") == false and player.cutscene == false then
-    player.keyboard = "up"
-  elseif love.keyboard.isDown("down") and love.keyboard.isDown("left", "up", "right") == false and player.cutscene == false then
-    player.keyboard = "down"
-  elseif love.keyboard.isDown("left") and love.keyboard.isDown("down", "up", "right") == false and player.cutscene == false then
-    player.keyboard = "left"
-  elseif love.keyboard.isDown("right") and love.keyboard.isDown("down", "up", "left") == false and player.cutscene == false then
-    player.keyboard = "right"
-  elseif love.keyboard.isDown("right") and love.keyboard.isDown("down") and player.cutscene == false then
+  if love.keyboard.isDown("right") and love.keyboard.isDown("down") and player.cutscene == false then
     player.keyboard = "rightdown"
   elseif love.keyboard.isDown("right") and love.keyboard.isDown("up") and player.cutscene == false then
     player.keyboard = "rightup"
@@ -106,6 +98,14 @@ function love.update(dt)
     player.keyboard = "updown"
   elseif love.keyboard.isDown("left") and love.keyboard.isDown("right") and player.cutscene == false then
     player.keyboard = "leftright"
+  elseif love.keyboard.isDown("up") and player.cutscene == false then
+    player.keyboard = "up"
+  elseif love.keyboard.isDown("down") and player.cutscene == false then
+    player.keyboard = "down"
+  elseif love.keyboard.isDown("left") and player.cutscene == false then
+    player.keyboard = "left"
+  elseif love.keyboard.isDown("right") and player.cutscene == false then
+    player.keyboard = "right"
   elseif player.cutscene == true then
   else
     player.keyboard = "none"
