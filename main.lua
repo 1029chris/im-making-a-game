@@ -2,10 +2,11 @@ function love.load()
   love.physics.setMeter(32)
   world = love.physics.newWorld(0, 0, true)
   love.graphics.setBackgroundColor(102, 204, 255)
-  assets = {}
-  assets.player = love.graphics.newImage("assets/char.png")
-  assets.shadow = love.graphics.newImage("assets/shadow.png")
-  assets.grass = love.graphics.newImage("assets/dirt.png")
+  assets = {
+    player = love.graphics.newImage("assets/char.png"),
+    shadow = love.graphics.newImage("assets/shadow.png"),
+    grass = love.graphics.newImage("assets/dirt.png")
+  }
   assets.player:setFilter("nearest", "nearest")
   assets.shadow:setFilter("nearest", "nearest")
   assets.grass:setFilter("nearest", "nearest")
@@ -40,27 +41,24 @@ function love.load()
   player.shape = love.physics.newRectangleShape(36, 36)
   player.fixture = love.physics.newFixture(player.body, player.shape, 1)
   player.frame = 1
-  map = {}
-  map.island = {}
-  map.island.x, map.island.y = love.graphics.getDimensions()
-  map.island.x = map.island.x/2
-  map.island.y = map.island.y/2
-  map.island.data = {
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 9999,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 9999,
-    0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9998
+  map = {
+    island = {
+      x = love.graphics.getWidth()/2,
+      y = love.graphics.getHeight()/2,
+      data = {
+        0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 9999,
+        1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
+        2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 9999,
+        0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9998
+      },
+      map = love.graphics.newSpriteBatch(assets.grass, 1000),
+    },
+    finish = false,
+    tile = 1,
+    tilex = 0,
+    tiley = 0,
+    current = {}
   }
-  map.island.map = love.graphics.newSpriteBatch(assets.grass, 1000)
-  map.finish = false
-  map.tile = 1
-  map.tilex = 0
-  map.tiley = 0
-  map.current = {}
-  map.current.x = 0
-  map.current.y = 0
-  map.current.data = {}
-  map.current.map = 0
   map.current = map.island
   wall = {}
   wall.body1 = love.physics.newBody(world, map.island.x/2-48-40, map.island.y/2+48-40, "static")
