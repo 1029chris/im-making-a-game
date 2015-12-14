@@ -56,6 +56,12 @@ function love.load()
   map.tile = 1
   map.tilex = 0
   map.tiley = 0
+  map.current = {}
+  map.current.x = 0
+  map.current.y = 0
+  map.current.data = {}
+  map.current.map = 0
+  map.current = map.island
   wall = {}
   wall.body1 = love.physics.newBody(world, map.island.x/2-48-40, map.island.y/2+48-40, "static")
   wall.shape1 = love.physics.newRectangleShape(78, 32)
@@ -175,22 +181,22 @@ function love.update(dt)
 end
 function love.draw()
   while map.finish == false do
-    if map.island.data[map.tile] == 1 then
-      map.island.map:add(grass.grass, map.tilex, map.tiley)
-    elseif map.island.data[map.tile] == 2 then
-      map.island.map:add(grass.grassdirt, map.tilex, map.tiley)
+    if map.current.data[map.tile] == 1 then
+      map.current.map:add(grass.grass, map.tilex, map.tiley)
+    elseif map.current.data[map.tile] == 2 then
+      map.current.map:add(grass.grassdirt, map.tilex, map.tiley)
     end
-    if map.island.data[map.tile] == 9998 then
+    if map.current.data[map.tile] == 9998 then
       map.finish = true
-    elseif map.island.data[map.tile] ~= 9999 then
+    elseif map.current.data[map.tile] ~= 9999 then
         map.tilex = map.tilex + 16
-    elseif map.island.data[map.tile] == 9999 then
+    elseif map.current.data[map.tile] == 9999 then
         map.tilex = 0
         map.tiley = map.tiley + 16
     end
     map.tile = map.tile + 1
   end
-  love.graphics.draw(map.island.map, map.island.x, map.island.y, 0, 3, 3, 80, 32)
+  love.graphics.draw(map.current.map, map.current.x, map.current.y, 0, 3, 3, 80, 32)
   love.graphics.draw(assets.shadow, player.x, player.y, 0, 3, 3, 0, -10)
   --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
   love.graphics.draw(assets.player, player.sprite, player.x, player.y, 0, 3, 3, -2, 12)
