@@ -28,6 +28,8 @@ function maps.draw()
       map.current.map:add(grass.grass, map.tilex, map.tiley)
     elseif map.current.data[map.tile] == 2 then
       map.current.map:add(grass.grassdirt, map.tilex, map.tiley)
+    elseif map.current.data[map.tile] == 3 then
+      map.current.map:add(grass.dirt, map.tilex, map.tiley)
     end
     if map.current.data[map.tile] == 9998 then
       map.finish = true
