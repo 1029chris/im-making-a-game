@@ -90,7 +90,7 @@ function player.update(dt)
     player.ani = 0
     player.frame = 1
   else
-    player.move = false
+    player.frame = 1
   end
 end
 function player.draw()
