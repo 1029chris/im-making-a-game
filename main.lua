@@ -16,7 +16,7 @@ function love.load()
   }
   grass = {}
   grass.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
-  grass.dirt = love.graphics.newQuad(0, 16, 32, 16, assets.grass:getDimensions())
+  grass.dirt = love.graphics.newQuad(0, 32, 16, 16, assets.grass:getDimensions())
   grass.grassdirt = love.graphics.newQuad(0, 16, 16, 16, assets.grass:getDimensions())
   player.load()
   maps.load()
