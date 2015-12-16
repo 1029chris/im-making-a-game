@@ -5,10 +5,11 @@ function maps.load()
   map.island.x = love.graphics.getWidth()/2
   map.island.y = love.graphics.getHeight()/2
   map.island.data = {
-    0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 9999,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 9999,
-    0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 9998
+    0, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
+    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9999,
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 9999,
+    0, 2, 1, 1, 1, 1, 1, 1, 2, 9999,
+    0, 0, 2, 2, 2, 2, 2, 2, 9998
   }
   map.island.map = love.graphics.newSpriteBatch(assets.grass, 1000)
   map.finish = false
