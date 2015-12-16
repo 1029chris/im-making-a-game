@@ -2,14 +2,12 @@ function love.load()
   love.physics.setMeter(32)
   world = love.physics.newWorld(0, 0, true)
   love.graphics.setBackgroundColor(102, 204, 255)
+  love.graphics.setDefaultFilter("nearest")
   assets = {
     player = love.graphics.newImage("assets/char.png"),
     shadow = love.graphics.newImage("assets/shadow.png"),
     grass = love.graphics.newImage("assets/dirt.png")
   }
-  assets.player:setFilter("nearest", "nearest")
-  assets.shadow:setFilter("nearest", "nearest")
-  assets.grass:setFilter("nearest", "nearest")
   player = {}
   player.x = 0
   player.y = 0
