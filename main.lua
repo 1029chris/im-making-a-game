@@ -11,7 +11,8 @@ function love.load()
   assets = {
     player = love.graphics.newImage("assets/char.png"),
     shadow = love.graphics.newImage("assets/shadow.png"),
-    grass = love.graphics.newImage("assets/dirt.png")
+    grass = love.graphics.newImage("assets/dirt.png"),
+    tree = love.graphics.newImage("assets/tree.png")
   }
   grass = {}
   grass.grass = love.graphics.newQuad(0, 0, 16, 16, assets.grass:getDimensions())
@@ -77,5 +78,6 @@ function love.draw()
   love.graphics.draw(map.current.map, map.current.x, map.current.y, 0, 3, 3, 80, 32)
   --love.graphics.draw(assets.grass, grass.grassdirt, wall.x, wall.y, 0, 3, 3)
   player.draw()
+  love.graphics.draw(assets.tree, 300, 100, 0, 3)
   love.graphics.print(love.mouse.getX() .. ", " .. love.mouse.getY())
 end
